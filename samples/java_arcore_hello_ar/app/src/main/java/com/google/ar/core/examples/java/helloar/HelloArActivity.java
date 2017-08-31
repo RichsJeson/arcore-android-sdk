@@ -16,20 +16,6 @@
 
 package com.google.ar.core.examples.java.helloar;
 
-import com.google.ar.core.Config;
-import com.google.ar.core.Frame;
-import com.google.ar.core.Frame.TrackingState;
-import com.google.ar.core.HitResult;
-import com.google.ar.core.Plane;
-import com.google.ar.core.PlaneHitResult;
-import com.google.ar.core.Session;
-import com.google.ar.core.examples.java.helloar.rendering.BackgroundRenderer;
-import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer;
-import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer.BlendMode;
-import com.google.ar.core.examples.java.helloar.rendering.PlaneAttachment;
-import com.google.ar.core.examples.java.helloar.rendering.PlaneRenderer;
-import com.google.ar.core.examples.java.helloar.rendering.PointCloudRenderer;
-
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
@@ -41,6 +27,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.google.ar.core.Config;
+import com.google.ar.core.Frame;
+import com.google.ar.core.Frame.TrackingState;
+import com.google.ar.core.HitResult;
+import com.google.ar.core.Plane;
+import com.google.ar.core.PlaneHitResult;
+import com.google.ar.core.Session;
+import com.google.ar.core.examples.java.helloar.hack.HackDeviceInfo;
+import com.google.ar.core.examples.java.helloar.rendering.BackgroundRenderer;
+import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer;
+import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer.BlendMode;
+import com.google.ar.core.examples.java.helloar.rendering.PlaneAttachment;
+import com.google.ar.core.examples.java.helloar.rendering.PlaneRenderer;
+import com.google.ar.core.examples.java.helloar.rendering.PointCloudRenderer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,6 +83,7 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HackDeviceInfo.hackBuildFingerprint();
         setContentView(R.layout.activity_main);
         mSurfaceView = (GLSurfaceView) findViewById(R.id.surfaceview);
 
