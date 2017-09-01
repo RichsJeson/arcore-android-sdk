@@ -2,6 +2,8 @@ package com.google.ar.core.examples.java.helloar.hack;
 
 import android.os.Build;
 
+import com.google.ar.core.examples.java.helloar.utils.TLog;
+
 import java.lang.reflect.Field;
 
 /**

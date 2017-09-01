@@ -1,4 +1,4 @@
-package com.google.ar.core.examples.java.helloar.hack;
+package com.google.ar.core.examples.java.helloar.utils;
 
 import android.util.Log;
 
