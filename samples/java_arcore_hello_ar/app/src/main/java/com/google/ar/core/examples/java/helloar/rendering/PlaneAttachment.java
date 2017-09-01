@@ -23,7 +23,7 @@ import com.google.ar.core.Pose;
  * that will stay on the plane (in Y direction), while still properly tracking the XZ changes
  * from the anchor updates.
  */
-public class PlaneAttachment {
+public class PlaneAttachment implements Attachment{
     private final Plane mPlane;
     private final Anchor mAnchor;
 

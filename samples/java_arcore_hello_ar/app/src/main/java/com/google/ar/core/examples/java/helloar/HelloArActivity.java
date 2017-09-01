@@ -36,12 +36,15 @@ import com.google.ar.core.Plane;
 import com.google.ar.core.PlaneHitResult;
 import com.google.ar.core.Session;
 import com.google.ar.core.examples.java.helloar.hack.HackDeviceInfo;
+import com.google.ar.core.examples.java.helloar.rendering.Attachment;
 import com.google.ar.core.examples.java.helloar.rendering.BackgroundRenderer;
+import com.google.ar.core.examples.java.helloar.rendering.FrameAttachment;
 import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer;
 import com.google.ar.core.examples.java.helloar.rendering.ObjectRenderer.BlendMode;
 import com.google.ar.core.examples.java.helloar.rendering.PlaneAttachment;
 import com.google.ar.core.examples.java.helloar.rendering.PlaneRenderer;
 import com.google.ar.core.examples.java.helloar.rendering.PointCloudRenderer;
+import com.google.ar.core.examples.java.helloar.utils.TLog;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,7 +81,7 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
 
     // Tap handling and UI.
     private ArrayBlockingQueue<MotionEvent> mQueuedSingleTaps = new ArrayBlockingQueue<>(16);
-    private ArrayList<PlaneAttachment> mTouches = new ArrayList<>();
+    private ArrayList<Attachment> mTouches = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,6 +253,11 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
                             mSession.addAnchor(hit.getHitPose())));
 
                         // Hits are sorted by depth. Consider only closest hit on a plane.
+                        TLog.d("HelloArActivity->onDrawFrame 检测到地面碰撞");
+                        break;
+                    }else {
+                        mTouches.add(new FrameAttachment(mSession.addAnchor(frame.getPose())));
+                        TLog.d("HelloArActivity->onDrawFrame 触摸到空间碰撞");
                         break;
                     }
                 }
@@ -294,7 +302,7 @@ public class HelloArActivity extends AppCompatActivity implements GLSurfaceView.
 
             // Visualize anchors created by touch.
             float scaleFactor = 1.0f;
-            for (PlaneAttachment planeAttachment : mTouches) {
+            for (Attachment planeAttachment : mTouches) {
                 if (!planeAttachment.isTracking()) {
                     continue;
                 }
